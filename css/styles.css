@@ -1,0 +1,151 @@
+* {
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --hue: 223;
+  --primary: hsl(var(--hue), 90%, 50%);
+  --transition-duration: 0.6s;
+  --transition-timing: cubic-bezier(0.65, 0, 0.35, 1);
+  font-size: calc(60px + (120 - 60) * (100vw - 320px) / (2560 - 320));
+
+  --offWhite: #f8f0e3;
+  --night: #080c0a;
+
+  --timberwolf: #dad7cd;
+  --sage: #a3b18a;
+  --fern: #588157;
+  --hunter: #3a5a40;
+  --brunswinck: #344e41;
+  --blackOlive: #213129;
+}
+
+body,
+input {
+  font: 1em/1.5 sans-serif;
+}
+
+body {
+  background-color: var(--sage);
+  color: var(--brunswinck);
+  display: flex;
+  height: 100vh;
+  transition: background-color var(--transition-duration),
+    color var(--transition-duration);
+}
+
+body:has(.switch_input:checked) {
+  background-color: var(--brunswinck);
+  color: var(--sage);
+}
+
+.switch,
+.switch_input {
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+.switch {
+  margin: auto;
+  position: relative;
+  user-select: none;
+}
+
+.switch_icon {
+  pointer-events: none;
+  position: absolute;
+  inset: 0.375em 0 0 0.375em;
+  width: 0.75em;
+  height: 0.75em;
+  transition: color var(--transition-duration),
+    transform var(--transition-duration) var(--transition-timing);
+}
+
+.switch_icon:nth-of-type(2) {
+  right: 0.375em;
+  left: auto;
+}
+
+.switch_inner,
+.switch_inner_icons {
+  border-radius: 0.5em;
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  inset: 0.25em 0 0 0.25em;
+  width: 2.25em;
+  height: 1em;
+}
+
+.switch_inner::before,
+.switch_inner_icons {
+  transition: transform var(--transition-duration) var(--transition-timing);
+  transform: translateX(-1.25em);
+}
+
+.switch_inner::before {
+  background-color: var(--blackOlive);
+  border-radius: inherit;
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.switch_inner_icons {
+  pointer-events: none;
+}
+
+.switch_inner_icons .switch_icon {
+  color: hsl(0, 0%, 100%);
+  inset: 0.125em 0 0 0.125em;
+  transform: translateX(1.25em);
+}
+
+.switch_inner_icons .switch_icon:nth-child(2) {
+  right: 0.125em;
+  left: auto;
+}
+
+.switch_input {
+  background-color: var(--hunter);
+  border-radius: 0.75em;
+  box-shadow: 0 0 0 0.0625em hsla(var(--hue), 90%, 50%, 0),
+    0 0.125em 0.5em hsla(var(--hue), 10%, 10%, 0.1);
+  outline: transparent;
+  width: 2.75em;
+  height: 1.5em;
+  appearance: none;
+  transition: background-color var(--transition-duration),
+    box-shadow var(--transition-duration);
+}
+
+.switch_input:checked {
+  background-color: var(--sage);
+}
+
+.switch_input:checked ~ .switch_icon {
+  color: hsla(var(--hue), 10%, 40%);
+}
+
+.switch_input:checked ~ .switch_inner::before,
+.switch_input:checked ~ .switch_inner_icons {
+  transform: translateX(1.25em);
+}
+
+.switch_input:checked ~ .switch_inner_icons .switch_icon:first-of-type {
+  transform: translateX(-1.25em);
+}
+
+.switch_input:checked ~ .switch_inner_icons .switch_icon:nth-of-type(2) {
+  transform: translateX(-1.25em);
+}
+
+.switch_input:focus-visible {
+  box-shadow: 0 0 0 0.0625em hsla(var(--hue), 90%, 50%, 1),
+    0 0.125em 0.5em hsla(var(--hue), 10%, 10%, 0.1);
+}
